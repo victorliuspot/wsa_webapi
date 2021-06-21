@@ -2,9 +2,24 @@
 @model IndexModel
 @{
     ViewData["Title"] = "Home page";
+    Model.ImageUrls = new List<string>();
+    if (!string.IsNullOrEmpty(Request.Query["id"]))
+    {
+        Model.ImageUrls.Add(SqlHelper.GetAnnotationImage(Request.Query["id"]));
+    }
+    if (!string.IsNullOrEmpty(Request.Query["rid"]))
+    {
+        Model.ImageUrls.AddRange(SqlHelper.GetAnnotationImagesById(Request.Query["rid"]));
+    }
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+    <div>
+        @{
+            foreach (var imgurl in Model.ImageUrls)
+            {
+                <div>
+                    <img src="@imgurl" style="max-height:400px; max-width:400px;" />
+                </div>
+            }
+        }
+    </div>

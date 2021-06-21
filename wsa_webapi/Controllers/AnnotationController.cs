@@ -25,6 +25,12 @@ namespace wsa_webapi.Controllers
             return "value";
         }
 
+        [HttpGet("{id}/image")]
+        public string GetImage(string id)
+        {
+            return SqlHelper.GetAnnotationImage(id);
+        }
+
         // POST api/<controller>
         [HttpPost]
         public void Post([FromBody]string value)

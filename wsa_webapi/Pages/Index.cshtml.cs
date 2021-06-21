@@ -9,6 +9,7 @@ namespace wsa_webapi.Pages
 {
     public class IndexModel : PageModel
     {
+        public List<string> ImageUrls { get; set; }
         public void OnGet()
         {
 
